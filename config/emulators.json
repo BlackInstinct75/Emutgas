@@ -1,0 +1,17 @@
+{
+    "NES": {
+        "exe": "/usr/bin/nestopia"
+    },
+    "SNES": {
+        "exe": "/usr/bin/snes9x"
+    },
+    "PS2": {
+        "exe": "/usr/bin/pcsx2"
+    },
+    "PSP": {
+        "exe": "/usr/bin/ppsspp"
+    },
+    "PC": {
+        "exe": null
+    }
+}
