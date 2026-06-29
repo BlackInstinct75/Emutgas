@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
-from ui.title_bar import TitleBar
+from PySide6.QtGui import QIcon
 from ui.game_grid import GameGrid
+from ui.TopRightBar import TopRightBar
 
 class MainWindow(QMainWindow):
     def __init__(self, games, launcher):
@@ -8,21 +9,26 @@ class MainWindow(QMainWindow):
         self.games = games
         self.launcher = launcher
 
-        self.setWindowTitle("Switch Launcher")
-        self.setStyleSheet("background-color: #202020;")
+        self.setWindowTitle("Emugast")
+        self.setWindowIcon(QIcon("assets/generic/logo.jpeg"))
 
-        # Layout principal
+        # Aplicar tema
+        # self.apply_theme("dark")
+        self.apply_theme("light")
+
         central = QWidget()
         layout = QVBoxLayout(central)
         layout.setContentsMargins(0, 0, 0, 0)
 
-        # Barra superior
-        self.title_bar = TitleBar(self)
-        layout.addWidget(self.title_bar)
-
-        # Grid de juegos
+        top_right_bar = TopRightBar()
+        layout.addWidget(top_right_bar)
+        
         self.grid = GameGrid(games)
         layout.addWidget(self.grid)
 
         self.setCentralWidget(central)
         self.showFullScreen()
+
+    def apply_theme(self, name):
+        with open(f"themes/{name}.qss", "r") as f:
+            self.setStyleSheet(f.read())

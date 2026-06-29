@@ -1,17 +1,21 @@
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
-from PySide6.QtGui import QPixmap
 
 class EmptyCard(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.setObjectName("card")  # usa el estilo del tema
+
         layout = QVBoxLayout(self)
 
-        cover = QLabel()
-        cover.setPixmap(QPixmap("assets/covers/empty.png").scaled(200, 200))
+        # Bloque de color (sin imagen)
+        color_block = QWidget()
+        color_block.setFixedSize(150, 150)
+        color_block.setObjectName("emptyBlock")
 
         title = QLabel("Vacío")
-        title.setStyleSheet("color: gray; font-size: 16px;")
+        title.setObjectName("title")
 
-        layout.addWidget(cover)
+        layout.addWidget(color_block)
         layout.addWidget(title)
+

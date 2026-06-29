@@ -1,0 +1,22 @@
+QWidget {
+    background-color: #111;
+    color: #eee;
+}
+
+#card {
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#emptyBlock {
+    background-color: #0a0a0a;   /* más oscuro que el card */
+    border: 2px solid #333;
+    border-radius: 6px;
+}
+
+#title {
+    color: #fff;
+    font-size: 16px;
+}
