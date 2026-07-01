@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QLabel, QHBoxLayout
+from PySide6.QtWidgets import QWidget, QLabel, QHBoxLayout, QSpacerItem, QSizePolicy
 from PySide6.QtCore import QTimer, Qt
 from PySide6.QtGui import QPixmap
 import pytz
@@ -9,11 +9,15 @@ class TopRightBar(QWidget):
         super().__init__()
 
         self.setObjectName("topRightBar")
-        self.setFixedHeight(30)
-        
+        self.setFixedHeight(80)
+
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setContentsMargins(10, 5, 10, 5)
         layout.setSpacing(20)
+
+        # --- ESPACIADOR PARA EMPUJAR TODO A LA DERECHA ---
+        spacer = QSpacerItem(1, 1, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        layout.addItem(spacer)
 
         # --- Reloj ---
         self.clock = QLabel()
@@ -38,10 +42,11 @@ class TopRightBar(QWidget):
         self.settings_icon.setObjectName("settingsIcon")
         self.settings_icon.setPixmap(QPixmap("assets/generic/settings.png").scaled(32, 32, Qt.KeepAspectRatio))
 
-        # Añadir widgets al layout
-        layout.addWidget(self.clock)
-        layout.addWidget(self.user_icon)
+        # Añadir widgets al layout (ya están empujados a la derecha)
+        
         layout.addWidget(self.settings_icon)
+        layout.addWidget(self.user_icon)
+        layout.addWidget(self.clock)
 
     def update_time(self):
         now = datetime.now(self.tz)

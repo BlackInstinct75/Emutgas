@@ -1,28 +1,41 @@
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
 from PySide6.QtGui import QPixmap
+from PySide6.QtCore import Qt
+
 
 class StoreCard(QWidget):
+    """Card de acceso a la tienda, estilo PS5."""
+
     def __init__(self):
         super().__init__()
-
-        self.setObjectName("storeCard")
+        self.setObjectName("card")
         self.setStyleSheet("""
-            #storeCard {
-                border: 2px solid #222;
-                border-radius: 10px;
-                background-color: #111;
-                padding: 10px;
+            #card {
+                background-color: #0d2b45;
+                border-radius: 14px;
+            }
+            QLabel#cardTitle {
+                color: #f2f2f2;
+                font-size: 14px;
+                font-weight: 500;
             }
         """)
 
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(8)
 
         cover = QLabel()
-        cover.setPixmap(QPixmap("assets/generic/store.png").scaled(200, 200))
+        cover.setAlignment(Qt.AlignCenter)
+        pixmap = QPixmap("assets/generic/store.png")
+        if not pixmap.isNull():
+            pixmap = pixmap.scaled(160, 160, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        cover.setPixmap(pixmap)
         cover.setObjectName("storeCover")
 
         title = QLabel("Tienda")
-        title.setStyleSheet("color: white; font-size: 18px;")
+        title.setObjectName("cardTitle")
+        title.setAlignment(Qt.AlignCenter)
 
-        layout.addWidget(cover)
-        layout.addWidget(title)
+        layout.addWidget(cover, 1)
+        layout.addWidget(title, 0)
